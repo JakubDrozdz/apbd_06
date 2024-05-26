@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apbd_06.Models;
 
+[Table("Prescription")]
 public class Prescription
 {
     [Key]

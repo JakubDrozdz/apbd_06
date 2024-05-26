@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace apbd_06.Models;
 
+[Table("Patient")]
 public class Patient
 {
     [Key]

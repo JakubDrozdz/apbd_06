@@ -1,17 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace apbd_06.Models;
 
 [Table("Prescription_Medicament")]
+[PrimaryKey(nameof(IdMedicament),nameof(IdPrescription))]
 public class PrescriptionMedicament
 {
-    [Key]
     [ForeignKey("Medicament")]
-    public Medicament IdMedicament { get; set; }
-    [Key]
+    public int IdMedicament { get; set; }
     [ForeignKey("Medicament")]
-    public Prescription IdPrescription { get; set; }
+    public int IdPrescription { get; set; }
     public int Dose { get; set; }
     [Required]
     [MaxLength(100)]
