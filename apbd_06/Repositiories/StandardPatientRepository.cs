@@ -22,4 +22,9 @@ public class StandardPatientRepository(MainDbContext mainDbContext) : IPatientRe
         await mainDbContext.SaveChangesAsync();
         return persistedPatient;
     }
+
+    public async Task<Patient> GetPatientDetails(int patientId)
+    {
+        return await mainDbContext.Patients.Include(np => np.Prescriptions).Where(p => p.IdPatient == patientId).FirstOrDefaultAsync();
+    }
 }

@@ -13,6 +13,8 @@ builder.Services.AddScoped<IPatientRepository, StandardPatientRepository>();
 builder.Services.AddScoped<IMedicamentRepository, StandardMedicamentRepository>();
 builder.Services.AddScoped<IPrescriptionMedicamentRepository, PrescriptionMedicamentRepository>();
 builder.Services.AddScoped<MainDbContext, MainDbContext>();
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDoctorRepository, StandardDoctorRepository>();
 
 var app = builder.Build();
 

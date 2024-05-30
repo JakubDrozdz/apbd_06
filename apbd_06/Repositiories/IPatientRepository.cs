@@ -8,4 +8,6 @@ public interface IPatientRepository
     public Task<Patient> IsPatientExist(PatientDto patient);
     
     public Task<Patient> AddPatient(PatientDto patient);
+    
+    public Task<Patient> GetPatientDetails(int patientId);
 }
