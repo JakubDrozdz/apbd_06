@@ -22,10 +22,10 @@ public class PrescriptionService(MainDbContext mainDbContext,
                     throw new Exception("Too much medicaments on a prescription");
                 }
 
-                if (!await patientRepository.IsPatientExist(command.patient.IdPatient))
+                var patient = await patientRepository.IsPatientExist(command.patient);
+                if (patient == null)
                 {
-                    //TODO: dedicated exception
-                    throw new Exception("Patient does not exist");
+                    patient = await patientRepository.AddPatient(command.patient);
                 }
 
                 foreach (var medicament in command.medicaments)
