@@ -28,6 +28,15 @@ public class PrescriptionService(MainDbContext mainDbContext,
                     throw new Exception("Patient does not exist");
                 }
 
+                foreach (var medicament in command.medicaments)
+                {
+                    if (!await medicamentRepository.IsMedicamentExist(medicament.IdMedicament))
+                    {
+                        //TODO: dedicated exception
+                        throw new Exception($"Medicament with ID {medicament.IdMedicament} does not exist");  
+                    }
+                }
+
                 transaction.Commit();
                 //dbTransaction.
                 return 0;
