@@ -16,7 +16,7 @@ public class Patient
     public string LastName { get; set; }
     
     [Required]
-    public DateOnly Birthdate { get; set; }
+    public DateTime Birthdate { get; set; }
     
     public virtual ICollection<Prescription> Prescriptions { get; set; }
 }

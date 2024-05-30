@@ -49,7 +49,7 @@ namespace apbd_06.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Birthdate = table.Column<DateOnly>(type: "date", nullable: false)
+                    Birthdate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,8 +62,8 @@ namespace apbd_06.Migrations
                 {
                     IdPrescription = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    DueDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "date", nullable: false),
                     IdPatient = table.Column<int>(type: "int", nullable: false),
                     IdDoctor = table.Column<int>(type: "int", nullable: false),
                     DoctorIdDoctor = table.Column<int>(type: "int", nullable: true),

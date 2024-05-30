@@ -89,7 +89,7 @@ namespace apbd_06.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPatient"));
 
-                    b.Property<DateOnly>("Birthdate")
+                    b.Property<DateTime>("Birthdate")
                         .HasColumnType("date");
 
                     b.Property<string>("FirstName")
@@ -115,13 +115,13 @@ namespace apbd_06.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPrescription"));
 
-                    b.Property<DateOnly>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("date");
 
                     b.Property<int?>("DoctorIdDoctor")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("DueDate")
+                    b.Property<DateTime>("DueDate")
                         .HasColumnType("date");
 
                     b.Property<int>("IdDoctor")
