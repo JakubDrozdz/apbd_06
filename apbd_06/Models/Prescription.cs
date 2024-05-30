@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using apbd_06.Commands;
 
 namespace apbd_06.Models;
 
@@ -20,4 +21,14 @@ public class Prescription
     public int IdDoctor { get; set; }
     
     public virtual ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; }
+    
+    public Prescription(){}
+
+    public Prescription(AddPrescriptionCommand command)
+    {
+        this.Date = command.Date;
+        this.DueDate = command.DueDate;
+        this.IdPatient = command.patient.IdPatient;
+        this.IdDoctor = 1;
+    }
 }

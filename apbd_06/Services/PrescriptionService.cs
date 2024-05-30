@@ -7,6 +7,7 @@ namespace apbd_06.Services;
 
 public class PrescriptionService(MainDbContext mainDbContext,
     IPrescriptionRepository prescriptionRepository,
+    IPrescriptionMedicamentRepository prescriptionMedicamentRepository,
     IMedicamentRepository medicamentRepository,
     IPatientRepository patientRepository) : IPrescriptionService
 {
@@ -43,6 +44,14 @@ public class PrescriptionService(MainDbContext mainDbContext,
                     throw new Exception("Due date is invalid");  
                 }
 
+                command.patient.IdPatient = patient.IdPatient;
+                var prescription = prescriptionRepository.AddPrescription(command);
+                foreach (var prescriptionMedicamentDto in command.medicaments)
+                {
+                    await prescriptionMedicamentRepository.AddPrescription(prescriptionMedicamentDto, prescription.Result.IdPrescription);
+                }
+                
+                
                 transaction.Commit();
                 return 0;
             }
