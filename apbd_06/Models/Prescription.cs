@@ -14,13 +14,17 @@ public class Prescription
     [Required] 
     public DateTime DueDate { get; set; }
     [Required]
-    [ForeignKey("Patient")]
     public int IdPatient { get; set; }
     [Required]
-    [ForeignKey("Doctor")]
     public int IdDoctor { get; set; }
     
     public virtual ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; }
+    
+    [ForeignKey("IdPatient")]
+    public virtual Patient Patient { get; set; }
+
+    [ForeignKey("IdDoctor")]
+    public virtual Doctor Doctor { get; set; }
     
     public Prescription(){}
 
