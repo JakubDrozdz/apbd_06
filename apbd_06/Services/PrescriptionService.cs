@@ -10,7 +10,8 @@ public class PrescriptionService(MainDbContext mainDbContext,
     IPrescriptionRepository prescriptionRepository,
     IPrescriptionMedicamentRepository prescriptionMedicamentRepository,
     IMedicamentRepository medicamentRepository,
-    IPatientRepository patientRepository) : IPrescriptionService
+    IPatientRepository patientRepository,
+    IDoctorRepository doctorRepository) : IPrescriptionService
 {
     public async Task<int> AddPrescription(AddPrescriptionCommand command)
     {
@@ -40,6 +41,11 @@ public class PrescriptionService(MainDbContext mainDbContext,
                 if (command.DueDate.Date < command.Date.Date)
                 {
                     throw new InvalidPrescriptionRequestException("Due date is invalid");  
+                }
+
+                if (await doctorRepository.GetDoctor(command.doctorId) == null)
+                {
+                    throw new InvalidPrescriptionRequestException($"Doctor with ID {command.doctorId} not exists");
                 }
 
                 command.patient.IdPatient = patient.IdPatient;

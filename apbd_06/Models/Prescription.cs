@@ -33,6 +33,6 @@ public class Prescription
         this.Date = command.Date;
         this.DueDate = command.DueDate;
         this.IdPatient = command.patient.IdPatient;
-        this.IdDoctor = 1;
+        this.IdDoctor = command.doctorId;
     }
 }
