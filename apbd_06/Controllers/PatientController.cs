@@ -1,3 +1,5 @@
+using apbd_06.Exceptions;
+using apbd_06.Models.DataTransferObjects;
 using apbd_06.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +12,15 @@ public class PatientController(IPatientService patientService) : ControllerBase
     [HttpGet("{patientId}")]
     public async Task<IActionResult> GetPatientDetails(int patientId)
     {
-        return Ok(await patientService.GetPatientDetails(patientId));
+        PatientDetailsDto response;
+        try
+        {
+            response = await patientService.GetPatientDetails(patientId);
+        }
+        catch (InvalidPatientRequestException e)
+        {
+            return BadRequest(e.Message);
+        }
+        return Ok(response);
     }
 }

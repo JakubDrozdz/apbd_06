@@ -1,3 +1,4 @@
+using apbd_06.Exceptions;
 using apbd_06.Models;
 using apbd_06.Models.DataTransferObjects;
 using apbd_06.Repositiories;
@@ -15,7 +16,7 @@ public class PatientService(IPatientRepository patientRepository,
         var patient = await patientRepository.GetPatientDetails(patientId);
         if (patient == null)
         {
-            throw new Exception("Patient does not exist");
+            throw new InvalidPatientRequestException("Patient does not exist");
         }
 
         patientDetailsDto.IdPatient = patient.IdPatient;

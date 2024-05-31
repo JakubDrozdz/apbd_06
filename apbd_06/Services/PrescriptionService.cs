@@ -1,4 +1,5 @@
 using apbd_06.Commands;
+using apbd_06.Exceptions;
 using apbd_06.Repositiories;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -19,8 +20,7 @@ public class PrescriptionService(MainDbContext mainDbContext,
             {
                 if (command.medicaments.Count() > 10)
                 {
-                    //TODO: dedicated exception
-                    throw new Exception("Too much medicaments on a prescription");
+                    throw new InvalidPrescriptionRequestException("Too much medicaments on a prescription");
                 }
 
                 var patient = await patientRepository.IsPatientExist(command.patient);
@@ -33,15 +33,13 @@ public class PrescriptionService(MainDbContext mainDbContext,
                 {
                     if (!await medicamentRepository.IsMedicamentExist(medicament.IdMedicament))
                     {
-                        //TODO: dedicated exception
-                        throw new Exception($"Medicament with ID {medicament.IdMedicament} does not exist");  
+                        throw new InvalidPrescriptionRequestException($"Medicament with ID {medicament.IdMedicament} does not exist");  
                     }
                 }
 
                 if (command.DueDate.Date < command.Date.Date)
                 {
-                    //TODO: dedicated exception
-                    throw new Exception("Due date is invalid");  
+                    throw new InvalidPrescriptionRequestException("Due date is invalid");  
                 }
 
                 command.patient.IdPatient = patient.IdPatient;
@@ -53,7 +51,7 @@ public class PrescriptionService(MainDbContext mainDbContext,
                 
                 
                 transaction.Commit();
-                return 0;
+                return prescription.Result.IdPrescription;
             }
             finally
             {

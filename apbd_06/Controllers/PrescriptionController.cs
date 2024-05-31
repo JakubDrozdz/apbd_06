@@ -1,4 +1,5 @@
 using apbd_06.Commands;
+using apbd_06.Exceptions;
 using apbd_06.Models;
 using apbd_06.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,10 @@ public class PrescriptionController(IPrescriptionService prescriptionService) : 
         {
             response = await prescriptionService.AddPrescription(command);
         }
-        catch (Exception e)
+        catch (InvalidPrescriptionRequestException e)
         {
             return BadRequest(e.Message);
         }
-        return Ok();
+        return Ok("ID: " + response);
     }
 }
